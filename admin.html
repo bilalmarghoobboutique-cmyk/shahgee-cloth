@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Shah Gee Cloth & Boutique House</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body">
+
+    <!-- ============ LOGIN SCREEN ============ -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-box">
+            <div class="login-brand">
+                <div class="login-logo-mark">SG</div>
+                <h1>Shah Gee Admin</h1>
+                <p>Control Panel Login</p>
+            </div>
+
+            <form id="loginForm" class="login-form">
+                <div class="login-field">
+                    <label><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter admin password" autocomplete="current-password">
+                    <small class="login-error" id="loginError"></small>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+
+                <p class="login-hint">
+                    <i class="fas fa-info-circle"></i>
+                    Default password: <code>shahgee2026</code>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============ ADMIN DASHBOARD ============ -->
+    <div id="adminApp" class="admin-app" style="display:none;">
+
+        <!-- SIDEBAR -->
+        <aside class="admin-sidebar" id="adminSidebar">
+            <div class="sidebar-brand">
+                <div class="sidebar-logo-mark">SG</div>
+                <div>
+                    <h2>Shah Gee</h2>
+                    <span>Admin Panel</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" data-section="dashboard" class="sidebar-link active">
+                    <i class="fas fa-chart-line"></i> <span>Dashboard</span>
+                </a>
+                <a href="#" data-section="products" class="sidebar-link">
+                    <i class="fas fa-tshirt"></i> <span>Products</span>
+                </a>
+                <a href="#" data-section="orders" class="sidebar-link">
+                    <i class="fas fa-shopping-bag"></i> <span>Orders</span>
+                    <span class="sidebar-badge" id="ordersBadge">0</span>
+                </a>
+                <a href="#" data-section="settings" class="sidebar-link">
+                    <i class="fas fa-cog"></i> <span>Settings</span>
+                </a>
+                <a href="index.html" target="_blank" class="sidebar-link sidebar-link-view">
+                    <i class="fas fa-external-link-alt"></i> <span>View Website</span>
+                </a>
+                <a href="#" id="logoutBtn" class="sidebar-link sidebar-link-logout">
+                    <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="admin-main">
+
+            <!-- TOPBAR -->
+            <header class="admin-topbar">
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 id="pageTitle">Dashboard</h1>
+                <div class="topbar-user">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Admin</span>
+                </div>
+            </header>
+
+            <!-- ============ DASHBOARD SECTION ============ -->
+            <section class="admin-section" id="section-dashboard">
+
+                <!-- STATS CARDS -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon stat-icon-blue"><i class="fas fa-calendar-day"></i></div>
+                        <div class="stat-info">
+                            <p>Today's Sales</p>
+                            <h3 id="statToday">Rs. 0</h3>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon stat-icon-green"><i class="fas fa-calendar-week"></i></div>
+                        <div class="stat-info">
+                            <p>This Week</p>
+                            <h3 id="statWeek">Rs. 0</h3>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon stat-icon-gold"><i class="fas fa-calendar-alt"></i></div>
+                        <div class="stat-info">
+                            <p>This Month</p>
+                            <h3 id="statMonth">Rs. 0</h3>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon stat-icon-purple"><i class="fas fa-calendar"></i></div>
+                        <div class="stat-info">
+                            <p>This Year</p>
+                            <h3 id="statYear">Rs. 0</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ORDER STATUS STATS -->
+                <div class="stats-grid stats-grid-small">
+                    <div class="stat-card-mini">
+                        <i class="fas fa-inbox"></i>
+                        <div>
+                            <p>Received</p>
+                            <h4 id="statReceived">0</h4>
+                        </div>
+                    </div>
+                    <div class="stat-card-mini">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <p>Pending</p>
+                            <h4 id="statPending">0</h4>
+                        </div>
+                    </div>
+                    <div class="stat-card-mini">
+                        <i class="fas fa-truck"></i>
+                        <div>
+                            <p>Delivered</p>
+                            <h4 id="statDelivered">0</h4>
+                        </div>
+                    </div>
+                    <div class="stat-card-mini">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <p>Complete</p>
+                            <h4 id="statComplete">0</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRODUCT STATS -->
+                <div class="stats-grid stats-grid-small">
+                    <div class="stat-card-mini">
+                        <i class="fas fa-tshirt"></i>
+                        <div>
+                            <p>Total Products</p>
+                            <h4 id="statTotalProducts">0</h4>
+                        </div>
+                    </div>
+                    <div class="stat-card-mini">
+                        <i class="fas fa-boxes"></i>
+                        <div>
+                            <p>Total Stock</p>
+                            <h4 id="statTotalStock">0</h4>
+                        </div>
+                    </div>
+                    <div class="stat-card-mini">
+                        <i class="fas fa-shopping-cart"></i>
+                        <div>
+                            <p>Total Sold</p>
+                            <h4 id="statTotalSold">0</h4>
+                        </div>
+                    </div>
+                    <div class="stat-card-mini">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <div>
+                            <p>Total Orders</p>
+                            <h4 id="statTotalOrders">0</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RECENT ORDERS -->
+                <div class="admin-card">
+                    <div class="card-header">
+                        <h2>Recent Orders</h2>
+                        <a href="#" class="card-link" data-section="orders">View All →</a>
+                    </div>
+                    <div class="table-wrap">
+                        <table class="admin-table" id="recentOrdersTable">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Total</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentOrdersBody">
+                                <tr><td colspan="5" class="empty-row">Koi orders nahi</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ============ PRODUCTS SECTION ============ -->
+            <section class="admin-section" id="section-products" style="display:none;">
+
+                <div class="section-toolbar">
+                    <h2>All Products</h2>
+                    <button class="btn-admin-primary" id="addProductBtn">
+                        <i class="fas fa-plus"></i> Add Product
+                    </button>
+                </div>
+
+                <div class="admin-card">
+                    <div class="table-wrap">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Photo</th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Price</th>
+                                    <th>Stock</th>
+                                    <th>Sold</th>
+                                    <th>Balance</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productsTableBody">
+                                <tr><td colspan="8" class="empty-row">Koi products nahi</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ============ ORDERS SECTION ============ -->
+            <section class="admin-section" id="section-orders" style="display:none;">
+
+                <div class="section-toolbar">
+                    <h2>All Orders</h2>
+                </div>
+
+                <!-- TABS -->
+                <div class="order-tabs">
+                    <button class="order-tab active" data-status="all">All</button>
+                    <button class="order-tab" data-status="received">Received</button>
+                    <button class="order-tab" data-status="pending">Pending</button>
+                    <button class="order-tab" data-status="delivered">Delivered</button>
+                    <button class="order-tab" data-status="complete">Complete</button>
+                </div>
+
+                <div class="admin-card">
+                    <div class="table-wrap">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Phone</th>
+                                    <th>Total</th>
+                                    <th>Payment</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ordersTableBody">
+                                <tr><td colspan="8" class="empty-row">Koi orders nahi</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ============ SETTINGS SECTION ============ -->
+            <section class="admin-section" id="section-settings" style="display:none;">
+
+                <div class="admin-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-lock"></i> Change Password</h2>
+                    </div>
+                    <form id="passwordForm" class="settings-form">
+                        <div class="form-group-admin">
+                            <label>Current Password</label>
+                            <input type="password" id="currentPassword">
+                        </div>
+                        <div class="form-group-admin">
+                            <label>New Password</label>
+                            <input type="password" id="newPassword">
+                        </div>
+                        <div class="form-group-admin">
+                            <label>Confirm New Password</label>
+                            <input type="password" id="confirmPassword">
+                        </div>
+                        <button type="submit" class="btn-admin-primary">
+                            <i class="fas fa-save"></i> Update Password
+                        </button>
+                    </form>
+                </div>
+
+                <div class="admin-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-mobile-alt"></i> Payment Accounts</h2>
+                    </div>
+                    <p class="settings-note">
+                        Ye accounts customer ko checkout page pe dikhte hain (Advance Payment select karne pe).
+                    </p>
+
+                    <form id="paymentForm" class="settings-form">
+                        <h3 class="form-subtitle">EasyPaisa</h3>
+                        <div class="form-row-admin">
+                            <div class="form-group-admin">
+                                <label>Account Title</label>
+                                <input type="text" id="easypaisaTitle" value="Syed Muhammad Naeem">
+                            </div>
+                            <div class="form-group-admin">
+                                <label>Account Number</label>
+                                <input type="text" id="easypaisaNumber" value="0322-8073733">
+                            </div>
+                        </div>
+
+                        <h3 class="form-subtitle">JazzCash</h3>
+                        <div class="form-row-admin">
+                            <div class="form-group-admin">
+                                <label>Account Title</label>
+                                <input type="text" id="jazzcashTitle" value="Syed Ahmed Raza">
+                            </div>
+                            <div class="form-group-admin">
+                                <label>Account Number</label>
+                                <input type="text" id="jazzcashNumber" value="0321-4739337">
+                            </div>
+                        </div>
+
+                        <h3 class="form-subtitle">Bank Transfer</h3>
+                        <div class="form-row-admin">
+                            <div class="form-group-admin">
+                                <label>Bank Name</label>
+                                <input type="text" id="bankName" placeholder="e.g. Meezan Bank">
+                            </div>
+                            <div class="form-group-admin">
+                                <label>Account Title</label>
+                                <input type="text" id="bankTitle" value="Shah Gee Cloth & Boutique House">
+                            </div>
+                        </div>
+                        <div class="form-row-admin">
+                            <div class="form-group-admin">
+                                <label>Account Number</label>
+                                <input type="text" id="bankAccount" placeholder="Account Number">
+                            </div>
+                            <div class="form-group-admin">
+                                <label>IBAN</label>
+                                <input type="text" id="bankIban" placeholder="PK00XXXX0000000000000000">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-admin-primary">
+                            <i class="fas fa-save"></i> Save Payment Accounts
+                        </button>
+                    </form>
+                </div>
+
+                <div class="admin-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-envelope"></i> Admin Emails</h2>
+                    </div>
+                    <p class="settings-note">
+                        New order aane pe in emails pe notification jayegi.
+                    </p>
+                    <form id="emailsForm" class="settings-form">
+                        <div class="form-group-admin">
+                            <label>Email Address 1 (Primary)</label>
+                            <input type="email" id="adminEmail1" value="Umers9961@gmail.com">
+                        </div>
+                        <div class="form-group-admin">
+                            <label>Email Address 2</label>
+                            <input type="email" id="adminEmail2" placeholder="second@example.com">
+                        </div>
+                        <div class="form-group-admin">
+                            <label>Email Address 3</label>
+                            <input type="email" id="adminEmail3" placeholder="third@example.com">
+                        </div>
+                        <button type="submit" class="btn-admin-primary">
+                            <i class="fas fa-save"></i> Save Emails
+                        </button>
+                    </form>
+                </div>
+
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ============ ADD/EDIT PRODUCT MODAL ============ -->
+    <div class="admin-modal" id="productModal">
+        <div class="admin-modal-box">
+            <div class="admin-modal-header">
+                <h2 id="productModalTitle">Add New Product</h2>
+                <button class="admin-modal-close" id="productModalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <form id="productForm" class="admin-modal-body">
+                <input type="hidden" id="productEditId">
+
+                <div class="form-group-admin">
+                    <label>Product Image URL *</label>
+                    <input type="text" id="pImage" placeholder="https://..." required>
+                    <small class="field-hint">Cloudinary ya kisi bhi image ka URL daalein</small>
+                </div>
+
+                <div class="form-group-admin">
+                    <label>Product Video URL (Optional)</label>
+                    <input type="text" id="pVideo" placeholder="https://...mp4">
+                </div>
+
+                <div class="form-group-admin">
+                    <label>Product Name *</label>
+                    <input type="text" id="pName" required>
+                </div>
+
+                <div class="form-row-admin">
+                    <div class="form-group-admin">
+                        <label>Category *</label>
+                        <select id="pCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="ladies-fabrics">Ladies Fabrics</option>
+                            <option value="gents-fabrics">Gents Fabrics</option>
+                            <option value="ladies-shawls">Ladies Shawls</option>
+                            <option value="gents-shawls">Gents Shawls</option>
+                            <option value="dhooti-lacha">Dhooti Lacha & Romals</option>
+                            <option value="readymade-kafan">Readymade Kafan</option>
+                            <option value="loose-kafan">Loose Kafan Fabric</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group-admin">
+                        <label>Sub-Category</label>
+                        <select id="pSubcategory">
+                            <option value="">None</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row-admin">
+                    <div class="form-group-admin">
+                        <label>Price (Rs.) *</label>
+                        <input type="number" id="pPrice" min="0" required>
+                    </div>
+                    <div class="form-group-admin">
+                        <label>Stock Quantity *</label>
+                        <input type="number" id="pStock" min="0" required>
+                    </div>
+                </div>
+
+                <div class="form-row-admin">
+                    <div class="form-group-admin">
+                        <label>Sizes (comma separated)</label>
+                        <input type="text" id="pSizes" placeholder="S, M, L, XL">
+                    </div>
+                    <div class="form-group-admin">
+                        <label>Colors (comma separated)</label>
+                        <input type="text" id="pColors" placeholder="Blue, Red, White">
+                    </div>
+                </div>
+
+                <div class="form-group-admin">
+                    <label>Description</label>
+                    <textarea id="pDescription" rows="3"></textarea>
+                </div>
+
+                <div class="admin-modal-footer">
+                    <button type="button" class="btn-admin-secondary" id="productCancelBtn">Cancel</button>
+                    <button type="submit" class="btn-admin-primary">
+                        <i class="fas fa-save"></i> Save Product
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============ ORDER DETAIL MODAL ============ -->
+    <div class="admin-modal" id="orderModal">
+        <div class="admin-modal-box admin-modal-box-large">
+            <div class="admin-modal-header">
+                <h2>Order Details</h2>
+                <button class="admin-modal-close" id="orderModalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="admin-modal-body" id="orderModalBody">
+                <!-- JS se fill hoga -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/admin.js"></script>
+
+</body>
+</html>

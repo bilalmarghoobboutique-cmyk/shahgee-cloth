@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice | Shah Gee Cloth & Boutique House</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="invoice-page">
+
+    <!-- TOP BAR (no-print) -->
+    <div class="top-bar no-print">
+        <div class="container top-bar-inner">
+            <span><i class="fas fa-phone"></i> 0322-8073733</span>
+            <span><i class="fas fa-map-marker-alt"></i> Main Bazaar #2, Ghaziabad, Lahore Cantt</span>
+        </div>
+    </div>
+
+    <!-- HEADER (no-print) -->
+    <header class="main-header no-print">
+        <div class="container header-inner">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>Shah Gee</h1>
+                    <span>Cloth & Boutique House</span>
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="cart.html" class="cart-btn">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- SUCCESS BANNER (no-print) -->
+    <div class="success-banner no-print">
+        <div class="container">
+            <div class="success-content">
+                <div class="success-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <div>
+                    <h2>Order Placed Successfully!</h2>
+                    <p>Aapka order confirm ho gaya hai. Neeche invoice dekhein aur print karein.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- INVOICE SECTION -->
+    <section class="invoice-section">
+        <div class="container">
+
+            <!-- LOADING -->
+            <div id="invoiceLoading" class="invoice-loading">
+                <div class="spinner"></div>
+                <p>Invoice load ho rahi hai...</p>
+            </div>
+
+            <!-- NOT FOUND -->
+            <div id="invoiceNotFound" class="empty-cart" style="display:none;">
+                <i class="fas fa-file-invoice"></i>
+                <h2>Invoice not found</h2>
+                <p>Ye order ID mojood nahi hai.</p>
+                <a href="shop.html" class="btn btn-primary">Continue Shopping</a>
+            </div>
+
+            <!-- INVOICE CONTENT -->
+            <div id="invoiceContent" style="display:none;">
+
+                <div class="invoice-document">
+
+                    <!-- INVOICE TOP HEADER -->
+                    <div class="inv-top">
+                        <div class="inv-brand">
+                            <div class="inv-logo-mark">SG</div>
+                            <div>
+                                <h1>Shah Gee</h1>
+                                <span>Cloth & Boutique House</span>
+                            </div>
+                        </div>
+                        <div class="inv-meta">
+                            <h2>INVOICE</h2>
+                            <table class="inv-meta-table">
+                                <tr>
+                                    <td>Order ID</td>
+                                    <td><strong id="invOrderId">—</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Date</td>
+                                    <td><strong id="invDate">—</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Status</td>
+                                    <td><span id="invStatus" class="status-pill">Received</span></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- DIVIDER -->
+                    <div class="inv-divider-gold"></div>
+
+                    <!-- SHOP + CUSTOMER INFO GRID -->
+                    <div class="inv-info-grid">
+
+                        <div class="inv-info-block">
+                            <h3>FROM</h3>
+                            <p class="inv-strong">Shah Gee Cloth & Boutique House</p>
+                            <p>Main Bazaar #2, Ghaziabad</p>
+                            <p>Lahore Cantt, Pakistan</p>
+                            <p><i class="fas fa-phone"></i> 0322-8073733</p>
+                            <p><i class="fas fa-envelope"></i> Umers9961@gmail.com</p>
+                        </div>
+
+                        <div class="inv-info-block">
+                            <h3>BILL TO</h3>
+                            <p class="inv-strong" id="invCustName">—</p>
+                            <p id="invCustPhone">—</p>
+                            <p id="invCustEmail">—</p>
+                            <p id="invCustAddress">—</p>
+                            <p id="invCustCity">—</p>
+                        </div>
+
+                        <div class="inv-info-block">
+                            <h3>PAYMENT</h3>
+                            <p class="inv-strong" id="invPaymentMethod">—</p>
+                            <p id="invPaymentAccount" style="display:none;">—</p>
+                            <p id="invPaymentTrx" style="display:none;">—</p>
+                        </div>
+
+                    </div>
+
+                    <!-- PRODUCTS TABLE -->
+                    <div class="inv-table-wrap">
+                        <table class="inv-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:50px;">#</th>
+                                    <th>Product Description</th>
+                                    <th style="width:80px; text-align:center;">Qty</th>
+                                    <th style="width:120px; text-align:right;">Rate</th>
+                                    <th style="width:130px; text-align:right;">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="invProducts">
+                                <!-- Products JS se -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- TOTALS + NOTES -->
+                    <div class="inv-bottom">
+                        <div class="inv-notes">
+                            <h4>Notes</h4>
+                            <p>Shukriya! Aapka order hamare paas mojood hai. Kisi bhi sawal ke liye humein call karein.</p>
+                            <p class="inv-thanks">— Shah Gee Cloth & Boutique House</p>
+                        </div>
+
+                        <div class="inv-totals">
+                            <div class="inv-row">
+                                <span>Subtotal</span>
+                                <span id="invSubtotal">Rs. 0</span>
+                            </div>
+                            <div class="inv-row">
+                                <span>Total Items</span>
+                                <span id="invItems">0</span>
+                            </div>
+                            <div class="inv-row">
+                                <span>Delivery Charges</span>
+                                <span id="invDC">Rs. 0</span>
+                            </div>
+                            <div class="inv-row inv-row-grand">
+                                <span>Grand Total</span>
+                                <span id="invGrand">Rs. 0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FOOTER STRIP -->
+                    <div class="inv-footer">
+                        <div class="inv-footer-left">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Thank you for shopping with us!</span>
+                        </div>
+                        <div class="inv-footer-right">
+                            <span>Shah Gee Cloth & Boutique House</span>
+                        </div>
+                    </div>
+
+                    <!-- CREDIT LINE -->
+                    <div class="inv-credit">
+                        <span class="inv-credit-label">Website Credits</span>
+                        <strong>Bilal Marghoob Creations</strong>
+                        <span class="inv-credit-contact">
+                            <i class="fas fa-phone"></i> 0092 326 6501314 &nbsp;|&nbsp;
+                            <i class="fas fa-envelope"></i> bilalmarghoobboutique@gmail.com
+                        </span>
+                    </div>
+
+                </div>
+
+                <!-- ACTION BUTTONS (no-print) -->
+                <div class="invoice-actions no-print">
+                    <button onclick="window.print()" class="btn btn-primary">
+                        <i class="fas fa-print"></i> Print Invoice
+                    </button>
+                    <a href="shop.html" class="btn btn-outline-dark">
+                        <i class="fas fa-shopping-bag"></i> Continue Shopping
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/invoice.js"></script>
+
+</body>
+</html>

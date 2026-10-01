@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Shah Gee Cloth & Boutique House</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div class="container top-bar-inner">
+            <span><i class="fas fa-phone"></i> 0322-8073733</span>
+            <span><i class="fas fa-map-marker-alt"></i> Main Bazaar #2, Ghaziabad, Lahore Cantt</span>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="main-header">
+        <div class="container header-inner">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>Shah Gee</h1>
+                    <span>Cloth & Boutique House</span>
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="cart.html" class="cart-btn">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- PAGE BANNER -->
+    <section class="page-banner">
+        <div class="container">
+            <h1>Checkout</h1>
+            <p>Complete your order details</p>
+        </div>
+    </section>
+
+    <!-- CHECKOUT SECTION -->
+    <section class="checkout-section">
+        <div class="container">
+
+            <div id="emptyCheckout" class="empty-cart" style="display:none;">
+                <i class="fas fa-shopping-bag"></i>
+                <h2>Your cart is empty</h2>
+                <p>Add products before checkout.</p>
+                <a href="shop.html" class="btn btn-primary">Shop Now</a>
+            </div>
+
+            <form id="checkoutForm" class="checkout-layout" style="display:none;">
+
+                <!-- LEFT: FORM -->
+                <div class="checkout-main">
+
+                    <!-- CUSTOMER DETAILS -->
+                    <div class="checkout-card">
+                        <h2><i class="fas fa-user"></i> Customer Details</h2>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Full Name <span class="req">*</span></label>
+                                <input type="text" id="custName" placeholder="e.g. Ahmed Khan" required>
+                                <small class="error-msg" id="errName"></small>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Phone Number <span class="req">*</span></label>
+                                <input type="tel" id="custPhone" placeholder="03XXXXXXXXX" maxlength="11" required>
+                                <small class="error-msg" id="errPhone"></small>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Email Address <span class="req">*</span></label>
+                                <input type="email" id="custEmail" placeholder="you@example.com" required>
+                                <small class="error-msg" id="errEmail"></small>
+                            </div>
+
+                            <div class="form-group">
+                                <label>City <span class="req">*</span></label>
+                                <input type="text" id="custCity" placeholder="e.g. Lahore" required>
+                                <small class="error-msg" id="errCity"></small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Complete Delivery Address <span class="req">*</span></label>
+                            <textarea id="custAddress" rows="3" placeholder="House #, Street, Area, Landmark..." required></textarea>
+                            <small class="error-msg" id="errAddress"></small>
+                        </div>
+                    </div>
+
+                    <!-- PAYMENT METHOD -->
+                    <div class="checkout-card">
+                        <h2><i class="fas fa-credit-card"></i> Payment Method</h2>
+
+                        <div class="payment-options">
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="cod" checked>
+                                <div class="payment-option-box">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                    <div>
+                                        <strong>Cash on Delivery (COD)</strong>
+                                        <p>Pay when you receive the order</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="advance">
+                                <div class="payment-option-box">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <div>
+                                        <strong>Advance Payment</strong>
+                                        <p>EasyPaisa, JazzCash, or Bank Transfer</p>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+
+                        <!-- ADVANCE PAYMENT DETAILS -->
+                        <div id="advanceSection" class="advance-section" style="display:none;">
+
+                            <h3>Select Payment Account</h3>
+
+                            <div class="advance-tabs">
+                                <button type="button" class="advance-tab active" data-tab="easypaisa">
+                                    <i class="fas fa-mobile-alt"></i> EasyPaisa
+                                </button>
+                                <button type="button" class="advance-tab" data-tab="jazzcash">
+                                    <i class="fas fa-mobile-alt"></i> JazzCash
+                                </button>
+                                <button type="button" class="advance-tab" data-tab="bank">
+                                    <i class="fas fa-university"></i> Bank Transfer
+                                </button>
+                            </div>
+
+                            <div class="advance-account" id="accountEasypaisa">
+                                <p><strong>Account Title:</strong> Syed Muhammad Naeem</p>
+                                <p><strong>Account Number:</strong> 0322-8073733</p>
+                                <p class="advance-note">Is account mein payment karein aur neeche TRX ID likhein.</p>
+                            </div>
+
+                            <div class="advance-account" id="accountJazzcash" style="display:none;">
+                                <p><strong>Account Title:</strong> Syed Ahmed Raza</p>
+                                <p><strong>Account Number:</strong> 0321-4739337</p>
+                                <p class="advance-note">Is account mein payment karein aur neeche TRX ID likhein.</p>
+                            </div>
+
+                            <div class="advance-account" id="accountBank" style="display:none;">
+                                <p><strong>Bank Name:</strong> [Admin Panel se add hoga]</p>
+                                <p><strong>Account Title:</strong> Shah Gee Cloth & Boutique House</p>
+                                <p><strong>Account Number:</strong> [Admin Panel se add hoga]</p>
+                                <p><strong>IBAN:</strong> [Admin Panel se add hoga]</p>
+                                <p class="advance-note">Bank transfer ke baad neeche TRX ID ya reference number likhein.</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Transaction ID (TRX ID) <span class="req">*</span></label>
+                                <input type="text" id="trxId" placeholder="e.g. 1234567890">
+                                <small class="error-msg" id="errTrx"></small>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Payment Screenshot (Optional)</label>
+                                <input type="file" id="paymentScreenshot" accept="image/*">
+                                <small class="hint">Screenshot upload karna zaroori nahi, magar behtar hai.</small>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- ORDER NOTES -->
+                    <div class="checkout-card">
+                        <h2><i class="fas fa-comment"></i> Order Notes (Optional)</h2>
+                        <textarea id="orderNotes" rows="3" placeholder="Koi khaas hidayat ya note..."></textarea>
+                    </div>
+
+                </div>
+
+                <!-- RIGHT: SUMMARY -->
+                <aside class="checkout-summary">
+                    <h3>Your Order</h3>
+
+                    <div id="checkoutItems" class="checkout-items"></div>
+
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span id="coSubtotal">Rs. 0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Total Items</span>
+                        <span id="coItems">0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Delivery Charges (DC)</span>
+                        <span id="coDC">Rs. 0</span>
+                    </div>
+
+                    <div class="summary-total">
+                        <span>Grand Total</span>
+                        <span id="coGrand">Rs. 0</span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block" id="placeOrderBtn">
+                        <i class="fas fa-check-circle"></i> Place Order
+                    </button>
+
+                    <p class="checkout-agree">
+                        <i class="fas fa-lock"></i>
+                        Order place karne se aap hamari terms se agree karte hain.
+                    </p>
+                </aside>
+
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h3>Shah Gee Cloth & Boutique House</h3>
+                <p>Premium fabrics and readymade garments for ladies and gents.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Main Bazaar #2, Ghaziabad, Lahore Cantt</p>
+                <p><i class="fas fa-phone"></i> 0322-8073733</p>
+                <p><i class="fas fa-envelope"></i> Umers9961@gmail.com</p>
+            </div>
+        </div>
+
+        <div class="credit-footer">
+            <div class="container">
+                <p class="credit-label">Website Credits</p>
+                <h4>Bilal Marghoob Creations</h4>
+                <p>For creating your online store or website, contact:</p>
+                <p class="credit-contact">
+                    <a href="tel:00923266501314"><i class="fas fa-phone"></i> 0092 326 6501314</a>
+                    <span class="divider">|</span>
+                    <a href="mailto:bilalmarghoobboutique@gmail.com"><i class="fas fa-envelope"></i> bilalmarghoobboutique@gmail.com</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 Shah Gee Cloth & Boutique House. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/checkout.js"></script>
+
+</body>
+</html>

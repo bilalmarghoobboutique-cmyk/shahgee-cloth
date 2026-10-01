@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart | Shah Gee Cloth & Boutique House</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div class="container top-bar-inner">
+            <span><i class="fas fa-phone"></i> 0322-8073733</span>
+            <span><i class="fas fa-map-marker-alt"></i> Main Bazaar #2, Ghaziabad, Lahore Cantt</span>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="main-header">
+        <div class="container header-inner">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>Shah Gee</h1>
+                    <span>Cloth & Boutique House</span>
+                </a>
+            </div>
+
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li class="dropdown">
+                        <a href="shop.html">Categories <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="shop.html?cat=ladies-fabrics">Ladies Fabrics</a></li>
+                            <li><a href="shop.html?cat=gents-fabrics">Gents Fabrics</a></li>
+                            <li><a href="shop.html?cat=ladies-shawls">Ladies Shawls</a></li>
+                            <li><a href="shop.html?cat=gents-shawls">Gents Shawls</a></li>
+                            <li><a href="shop.html?cat=dhooti-lacha">Dhooti Lacha & Romals</a></li>
+                            <li><a href="shop.html?cat=readymade-kafan">Readymade Kafan</a></li>
+                            <li><a href="shop.html?cat=loose-kafan">Loose Kafan Fabric</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="checkout.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="cart.html" class="cart-btn">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- PAGE BANNER -->
+    <section class="page-banner">
+        <div class="container">
+            <h1>Shopping Cart</h1>
+            <p>Review your items before checkout</p>
+        </div>
+    </section>
+
+    <!-- CART SECTION -->
+    <section class="cart-section">
+        <div class="container">
+
+            <!-- EMPTY CART MESSAGE -->
+            <div id="emptyCart" class="empty-cart" style="display:none;">
+                <i class="fas fa-shopping-bag"></i>
+                <h2>Your cart is empty</h2>
+                <p>Add some products to get started.</p>
+                <a href="shop.html" class="btn btn-primary">
+                    <i class="fas fa-shopping-bag"></i> Shop Now
+                </a>
+            </div>
+
+            <!-- CART CONTENT -->
+            <div id="cartContent" class="cart-layout" style="display:none;">
+
+                <!-- LEFT: CART TABLE -->
+                <div class="cart-main">
+                    <div class="cart-table-wrap">
+                        <table class="cart-table">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="cartBody">
+                                <!-- Cart items JS se load honge -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="cart-actions">
+                        <a href="shop.html" class="btn btn-outline-dark">
+                            <i class="fas fa-arrow-left"></i> Continue Shopping
+                        </a>
+                        <button class="btn btn-outline-dark" id="clearCartBtn">
+                            <i class="fas fa-trash"></i> Clear Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- RIGHT: SUMMARY -->
+                <aside class="cart-summary">
+                    <h3>Order Summary</h3>
+
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span id="subtotal">Rs. 0</span>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Total Items</span>
+                        <span id="totalItems">0</span>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Delivery Charges (DC)</span>
+                        <span id="dcAmount">Rs. 0</span>
+                    </div>
+
+                    <div class="summary-note">
+                        <i class="fas fa-info-circle"></i>
+                        DC = Total Quantity × Rs. 300
+                    </div>
+
+                    <div class="summary-total">
+                        <span>Grand Total</span>
+                        <span id="grandTotal">Rs. 0</span>
+                    </div>
+
+                    <a href="checkout.html" class="btn btn-primary btn-block">
+                        <i class="fas fa-credit-card"></i> Proceed to Checkout
+                    </a>
+                </aside>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h3>Shah Gee Cloth & Boutique House</h3>
+                <p>Premium fabrics and readymade garments for ladies and gents. Serving Lahore Cantt with quality and trust.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="shop.html?cat=ladies-fabrics">Ladies Fabrics</a></li>
+                    <li><a href="shop.html?cat=gents-fabrics">Gents Fabrics</a></li>
+                    <li><a href="shop.html?cat=ladies-shawls">Ladies Shawls</a></li>
+                    <li><a href="shop.html?cat=readymade-kafan">Readymade Kafan</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Main Bazaar #2, Ghaziabad, Lahore Cantt, Pakistan</p>
+                <p><i class="fas fa-phone"></i> Syed Muhammad Naeem: 0322-8073733</p>
+                <p><i class="fas fa-phone"></i> Syed Ahmed Raza: 0321-4739337</p>
+                <p><i class="fas fa-phone"></i> Syed Muhammad Umer: 0323-0464898</p>
+                <p><i class="fas fa-envelope"></i> Umers9961@gmail.com</p>
+            </div>
+        </div>
+
+        <div class="credit-footer">
+            <div class="container">
+                <p class="credit-label">Website Credits</p>
+                <h4>Bilal Marghoob Creations</h4>
+                <p>For creating your online store or website, contact:</p>
+                <p class="credit-contact">
+                    <a href="tel:00923266501314"><i class="fas fa-phone"></i> 0092 326 6501314</a>
+                    <span class="divider">|</span>
+                    <a href="mailto:bilalmarghoobboutique@gmail.com"><i class="fas fa-envelope"></i> bilalmarghoobboutique@gmail.com</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 Shah Gee Cloth & Boutique House. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+
+</body>
+</html>
