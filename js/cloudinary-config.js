@@ -5,7 +5,6 @@
 
 const CLOUDINARY_CLOUD_NAME = 'mo7lzjdjn';
 const CLOUDINARY_UPLOAD_PRESET = 'shahgee_unsigned';
-const CLOUDINARY_API_KEY = '934767465988877';
 
 // ============================================
 // IMAGE UPLOAD
@@ -16,7 +15,6 @@ async function uploadImageToCloudinary(file) {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-    formData.append('folder', 'shahgee-cloth/images');
 
     try {
         const response = await fetch(
@@ -36,7 +34,10 @@ async function uploadImageToCloudinary(file) {
                 publicId: data.public_id
             };
         } else {
-            return { success: false, error: data.error?.message || 'Upload fail' };
+            return {
+                success: false,
+                error: data.error?.message || 'Upload fail'
+            };
         }
     } catch (err) {
         console.error('Image upload error:', err);
@@ -53,7 +54,6 @@ async function uploadVideoToCloudinary(file) {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-    formData.append('folder', 'shahgee-cloth/videos');
 
     try {
         const response = await fetch(
@@ -73,7 +73,10 @@ async function uploadVideoToCloudinary(file) {
                 publicId: data.public_id
             };
         } else {
-            return { success: false, error: data.error?.message || 'Upload fail' };
+            return {
+                success: false,
+                error: data.error?.message || 'Upload fail'
+            };
         }
     } catch (err) {
         console.error('Video upload error:', err);
