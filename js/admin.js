@@ -207,6 +207,62 @@ function setupProductModal() {
             subcategorySelect.innerHTML = '<option value="">None</option>';
             modal.classList.add('active');
         });
+    
+        // ---------- IMAGE UPLOAD ----------
+    const uploadImageBtn = document.getElementById('uploadImageBtn');
+    if (uploadImageBtn) {
+        uploadImageBtn.addEventListener('click', async function() {
+            const file = await pickImageFile();
+            if (!file) return;
+
+            const statusEl = document.getElementById('uploadImageStatus');
+            statusEl.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+            uploadImageBtn.disabled = true;
+
+            const result = await uploadImageToCloudinary(file);
+
+            uploadImageBtn.disabled = false;
+
+            if (result.success) {
+                document.getElementById('pImage').value = result.url;
+                statusEl.innerHTML = '<span style="color:#27ae60;"><i class="fas fa-check"></i> Upload ho gayi!</span>';
+
+                // Preview
+                const preview = document.getElementById('imagePreview');
+                const previewImg = document.getElementById('imagePreviewImg');
+                previewImg.src = result.url;
+                preview.style.display = 'block';
+            } else {
+                statusEl.innerHTML = '<span style="color:#c0392b;">Error: ' + result.error + '</span>';
+            }
+        });
+    }
+
+    // ---------- VIDEO UPLOAD ----------
+    const uploadVideoBtn = document.getElementById('uploadVideoBtn');
+    if (uploadVideoBtn) {
+        uploadVideoBtn.addEventListener('click', async function() {
+            const file = await pickVideoFile();
+            if (!file) return;
+
+            const statusEl = document.getElementById('uploadVideoStatus');
+            statusEl.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading (thoda waqt lagega)...';
+            uploadVideoBtn.disabled = true;
+
+            const result = await uploadVideoToCloudinary(file);
+
+            uploadVideoBtn.disabled = false;
+
+            if (result.success) {
+                document.getElementById('pVideo').value = result.url;
+                statusEl.innerHTML = '<span style="color:#27ae60;"><i class="fas fa-check"></i> Video upload ho gayi!</span>';
+            } else {
+                statusEl.innerHTML = '<span style="color:#c0392b;">Error: ' + result.error + '</span>';
+            }
+        });
+    }
+    
+    
     }
 
     [closeBtn, cancelBtn].forEach(btn => {

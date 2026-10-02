@@ -91,10 +91,8 @@
                 </div>
             </header>
 
-            <!-- ============ DASHBOARD SECTION ============ -->
+            <!-- DASHBOARD SECTION -->
             <section class="admin-section" id="section-dashboard">
-
-                <!-- STATS CARDS -->
                 <div class="stats-grid">
                     <div class="stat-card">
                         <div class="stat-icon stat-icon-blue"><i class="fas fa-calendar-day"></i></div>
@@ -103,7 +101,6 @@
                             <h3 id="statToday">Rs. 0</h3>
                         </div>
                     </div>
-
                     <div class="stat-card">
                         <div class="stat-icon stat-icon-green"><i class="fas fa-calendar-week"></i></div>
                         <div class="stat-info">
@@ -111,7 +108,6 @@
                             <h3 id="statWeek">Rs. 0</h3>
                         </div>
                     </div>
-
                     <div class="stat-card">
                         <div class="stat-icon stat-icon-gold"><i class="fas fa-calendar-alt"></i></div>
                         <div class="stat-info">
@@ -119,7 +115,6 @@
                             <h3 id="statMonth">Rs. 0</h3>
                         </div>
                     </div>
-
                     <div class="stat-card">
                         <div class="stat-icon stat-icon-purple"><i class="fas fa-calendar"></i></div>
                         <div class="stat-info">
@@ -129,78 +124,51 @@
                     </div>
                 </div>
 
-                <!-- ORDER STATUS STATS -->
                 <div class="stats-grid stats-grid-small">
                     <div class="stat-card-mini">
                         <i class="fas fa-inbox"></i>
-                        <div>
-                            <p>Received</p>
-                            <h4 id="statReceived">0</h4>
-                        </div>
+                        <div><p>Received</p><h4 id="statReceived">0</h4></div>
                     </div>
                     <div class="stat-card-mini">
                         <i class="fas fa-clock"></i>
-                        <div>
-                            <p>Pending</p>
-                            <h4 id="statPending">0</h4>
-                        </div>
+                        <div><p>Pending</p><h4 id="statPending">0</h4></div>
                     </div>
                     <div class="stat-card-mini">
                         <i class="fas fa-truck"></i>
-                        <div>
-                            <p>Delivered</p>
-                            <h4 id="statDelivered">0</h4>
-                        </div>
+                        <div><p>Delivered</p><h4 id="statDelivered">0</h4></div>
                     </div>
                     <div class="stat-card-mini">
                         <i class="fas fa-check-circle"></i>
-                        <div>
-                            <p>Complete</p>
-                            <h4 id="statComplete">0</h4>
-                        </div>
+                        <div><p>Complete</p><h4 id="statComplete">0</h4></div>
                     </div>
                 </div>
 
-                <!-- PRODUCT STATS -->
                 <div class="stats-grid stats-grid-small">
                     <div class="stat-card-mini">
                         <i class="fas fa-tshirt"></i>
-                        <div>
-                            <p>Total Products</p>
-                            <h4 id="statTotalProducts">0</h4>
-                        </div>
+                        <div><p>Total Products</p><h4 id="statTotalProducts">0</h4></div>
                     </div>
                     <div class="stat-card-mini">
                         <i class="fas fa-boxes"></i>
-                        <div>
-                            <p>Total Stock</p>
-                            <h4 id="statTotalStock">0</h4>
-                        </div>
+                        <div><p>Total Stock</p><h4 id="statTotalStock">0</h4></div>
                     </div>
                     <div class="stat-card-mini">
                         <i class="fas fa-shopping-cart"></i>
-                        <div>
-                            <p>Total Sold</p>
-                            <h4 id="statTotalSold">0</h4>
-                        </div>
+                        <div><p>Total Sold</p><h4 id="statTotalSold">0</h4></div>
                     </div>
                     <div class="stat-card-mini">
                         <i class="fas fa-hand-holding-usd"></i>
-                        <div>
-                            <p>Total Orders</p>
-                            <h4 id="statTotalOrders">0</h4>
-                        </div>
+                        <div><p>Total Orders</p><h4 id="statTotalOrders">0</h4></div>
                     </div>
                 </div>
 
-                <!-- RECENT ORDERS -->
                 <div class="admin-card">
                     <div class="card-header">
                         <h2>Recent Orders</h2>
                         <a href="#" class="card-link" data-section="orders">View All →</a>
                     </div>
                     <div class="table-wrap">
-                        <table class="admin-table" id="recentOrdersTable">
+                        <table class="admin-table">
                             <thead>
                                 <tr>
                                     <th>Order ID</th>
@@ -216,12 +184,10 @@
                         </table>
                     </div>
                 </div>
-
             </section>
 
-            <!-- ============ PRODUCTS SECTION ============ -->
+            <!-- PRODUCTS SECTION -->
             <section class="admin-section" id="section-products" style="display:none;">
-
                 <div class="section-toolbar">
                     <h2>All Products</h2>
                     <button class="btn-admin-primary" id="addProductBtn">
@@ -250,17 +216,14 @@
                         </table>
                     </div>
                 </div>
-
             </section>
 
-            <!-- ============ ORDERS SECTION ============ -->
+            <!-- ORDERS SECTION -->
             <section class="admin-section" id="section-orders" style="display:none;">
-
                 <div class="section-toolbar">
                     <h2>All Orders</h2>
                 </div>
 
-                <!-- TABS -->
                 <div class="order-tabs">
                     <button class="order-tab active" data-status="all">All</button>
                     <button class="order-tab" data-status="received">Received</button>
@@ -290,12 +253,10 @@
                         </table>
                     </div>
                 </div>
-
             </section>
 
-            <!-- ============ SETTINGS SECTION ============ -->
+            <!-- SETTINGS SECTION -->
             <section class="admin-section" id="section-settings" style="display:none;">
-
                 <div class="admin-card">
                     <div class="card-header">
                         <h2><i class="fas fa-lock"></i> Change Password</h2>
@@ -323,9 +284,7 @@
                     <div class="card-header">
                         <h2><i class="fas fa-mobile-alt"></i> Payment Accounts</h2>
                     </div>
-                    <p class="settings-note">
-                        Ye accounts customer ko checkout page pe dikhte hain (Advance Payment select karne pe).
-                    </p>
+                    <p class="settings-note">Ye accounts customer ko checkout page pe dikhte hain (Advance Payment select karne pe).</p>
 
                     <form id="paymentForm" class="settings-form">
                         <h3 class="form-subtitle">EasyPaisa</h3>
@@ -384,9 +343,7 @@
                     <div class="card-header">
                         <h2><i class="fas fa-envelope"></i> Admin Emails</h2>
                     </div>
-                    <p class="settings-note">
-                        New order aane pe in emails pe notification jayegi.
-                    </p>
+                    <p class="settings-note">New order aane pe in emails pe notification jayegi.</p>
                     <form id="emailsForm" class="settings-form">
                         <div class="form-group-admin">
                             <label>Email Address 1 (Primary)</label>
@@ -405,7 +362,6 @@
                         </button>
                     </form>
                 </div>
-
             </section>
 
         </main>
@@ -424,15 +380,31 @@
             <form id="productForm" class="admin-modal-body">
                 <input type="hidden" id="productEditId">
 
+                <!-- IMAGE UPLOAD -->
                 <div class="form-group-admin">
-                    <label>Product Image URL *</label>
-                    <input type="text" id="pImage" placeholder="https://..." required>
-                    <small class="field-hint">Cloudinary ya kisi bhi image ka URL daalein</small>
+                    <label>Product Image *</label>
+                    <input type="text" id="pImage" placeholder="https://... ya upload button dabayein" required>
+                    <div style="display:flex; gap:10px; margin-top:8px; align-items:center; flex-wrap:wrap;">
+                        <button type="button" id="uploadImageBtn" class="btn-admin-secondary" style="padding:8px 16px; font-size:12px;">
+                            <i class="fas fa-upload"></i> Upload Image
+                        </button>
+                        <span id="uploadImageStatus" style="font-size:12px; color:#6b6b6b;"></span>
+                    </div>
+                    <div id="imagePreview" style="margin-top:10px; display:none;">
+                        <img id="imagePreviewImg" style="max-width:120px; border-radius:6px; border:1px solid #e5e7eb;">
+                    </div>
                 </div>
 
+                <!-- VIDEO UPLOAD -->
                 <div class="form-group-admin">
-                    <label>Product Video URL (Optional)</label>
-                    <input type="text" id="pVideo" placeholder="https://...mp4">
+                    <label>Product Video (Optional)</label>
+                    <input type="text" id="pVideo" placeholder="https://... ya upload button dabayein">
+                    <div style="display:flex; gap:10px; margin-top:8px; align-items:center; flex-wrap:wrap;">
+                        <button type="button" id="uploadVideoBtn" class="btn-admin-secondary" style="padding:8px 16px; font-size:12px;">
+                            <i class="fas fa-video"></i> Upload Video
+                        </button>
+                        <span id="uploadVideoStatus" style="font-size:12px; color:#6b6b6b;"></span>
+                    </div>
                 </div>
 
                 <div class="form-group-admin">
@@ -509,15 +481,14 @@
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            <div class="admin-modal-body" id="orderModalBody">
-                <!-- JS se fill hoga -->
-            </div>
+            <div class="admin-modal-body" id="orderModalBody"></div>
         </div>
     </div>
 
-       <!-- Supabase Library -->
+    <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase-config.js"></script>
+    <script src="js/cloudinary-config.js"></script>
     <script src="js/products.js"></script>
     <script src="js/cart.js"></script>
     <script src="js/admin.js"></script>
