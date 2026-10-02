@@ -1,6 +1,6 @@
 // ============================================
 // SHAH GEE CLOTH & BOUTIQUE HOUSE
-// Checkout Page Logic
+// Checkout Page Logic (Supabase Integrated)
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupFormSubmit();
 });
 
-// ---------- SUMMARY RENDER ----------
+// ---------- SUMMARY ----------
 function renderCheckoutSummary(cart) {
     const itemsEl = document.getElementById('checkoutItems');
     let html = '';
@@ -90,14 +90,13 @@ function setupAdvanceTabs() {
         tab.addEventListener('click', function() {
             tabs.forEach(t => t.classList.remove('active'));
             this.classList.add('active');
-
             Object.values(accounts).forEach(a => a.style.display = 'none');
             accounts[this.dataset.tab].style.display = 'block';
         });
     });
 }
 
-// ---------- FORM VALIDATION ----------
+// ---------- VALIDATION ----------
 function setupFormValidation() {
     const phone = document.getElementById('custPhone');
     phone.addEventListener('input', function() {
@@ -122,22 +121,18 @@ function validateForm() {
         showError('custName', 'errName', 'Poora naam likhein (kam az kam 3 letters)');
         valid = false;
     }
-
     if (!/^03\d{9}$/.test(phone)) {
         showError('custPhone', 'errPhone', 'Phone number 03XX-XXXXXXX format mein likhein');
         valid = false;
     }
-
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         showError('custEmail', 'errEmail', 'Sahi email address likhein');
         valid = false;
     }
-
     if (city.length < 2) {
         showError('custCity', 'errCity', 'City ka naam likhein');
         valid = false;
     }
-
     if (address.length < 10) {
         showError('custAddress', 'errAddress', 'Poora address likhein (kam az kam 10 letters)');
         valid = false;
@@ -162,10 +157,10 @@ function showError(inputId, errId, msg) {
     if (err) err.textContent = msg;
 }
 
-// ---------- SUBMIT ----------
+// ---------- SUBMIT (SUPABASE) ----------
 function setupFormSubmit() {
     const form = document.getElementById('checkoutForm');
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async function(e) {
         e.preventDefault();
 
         if (!validateForm()) {
@@ -173,35 +168,75 @@ function setupFormSubmit() {
             return;
         }
 
+        // Button disable karein
+        const submitBtn = document.getElementById('placeOrderBtn');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Order save ho raha hai...';
+
         const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+        const cart = getCart();
+        const totals = calculateTotals();
 
         const orderData = {
-            orderId: 'SG-' + Date.now(),
-            date: new Date().toISOString(),
-            customer: {
-                name: document.getElementById('custName').value.trim(),
-                phone: document.getElementById('custPhone').value.trim(),
-                email: document.getElementById('custEmail').value.trim(),
-                city: document.getElementById('custCity').value.trim(),
-                address: document.getElementById('custAddress').value.trim()
-            },
-            payment: {
-                method: paymentMethod,
-                trxId: paymentMethod === 'advance' ? document.getElementById('trxId').value.trim() : '',
-                account: paymentMethod === 'advance'
-                    ? document.querySelector('.advance-tab.active').dataset.tab
-                    : 'cod'
-            },
+            order_id: 'SG-' + Date.now(),
+            customer_name: document.getElementById('custName').value.trim(),
+            customer_phone: document.getElementById('custPhone').value.trim(),
+            customer_email: document.getElementById('custEmail').value.trim(),
+            customer_city: document.getElementById('custCity').value.trim(),
+            customer_address: document.getElementById('custAddress').value.trim(),
+            items: cart,
+            subtotal: totals.subtotal,
+            total_items: totals.totalItems,
+            dc: totals.dc,
+            grand_total: totals.grand,
+            payment_method: paymentMethod,
+            payment_account: paymentMethod === 'advance'
+                ? document.querySelector('.advance-tab.active').dataset.tab
+                : 'cod',
+            payment_trx: paymentMethod === 'advance' ? document.getElementById('trxId').value.trim() : '',
             notes: document.getElementById('orderNotes').value.trim(),
-            items: getCart(),
-            status: 'received',
-            totals: calculateTotals()
+            status: 'received'
         };
 
-        saveOrder(orderData);
+        // Supabase mein save karo
+        const result = await saveOrderToSupabase(orderData);
+
+        if (!result.success) {
+            alert('Order save nahi hua. Internet ya keys check karein.\n\nError: ' + result.error);
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+            return;
+        }
+
+        // LocalStorage mein bhi backup save karo (old format ke saath)
+        const localOrderData = {
+            orderId: orderData.order_id,
+            date: new Date().toISOString(),
+            customer: {
+                name: orderData.customer_name,
+                phone: orderData.customer_phone,
+                email: orderData.customer_email,
+                city: orderData.customer_city,
+                address: orderData.customer_address
+            },
+            payment: {
+                method: orderData.payment_method,
+                trxId: orderData.payment_trx,
+                account: orderData.payment_account
+            },
+            notes: orderData.notes,
+            items: cart,
+            status: 'received',
+            totals: totals
+        };
+        saveOrder(localOrderData);
+
+        // Cart khaali karo
         localStorage.removeItem('shahgee_cart');
 
-        window.location.href = 'invoice.html?order=' + orderData.orderId;
+        // Invoice pe redirect
+        window.location.href = 'invoice.html?order=' + orderData.order_id;
     });
 }
 
